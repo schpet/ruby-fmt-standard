@@ -26,4 +26,3 @@ jobs:
           rm rubyfmt.tar.gz
       - name: rubyfmt
         run: ./tmp/releases/v0.8.1-Linux/rubyfmt -c .
-

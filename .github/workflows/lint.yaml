@@ -1,0 +1,29 @@
+name: lint
+on: push
+jobs:
+  standard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - run: bundle exec standardrb
+
+  rubyfmt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install rubyfmt
+        run: |
+          curl -Lo rubyfmt.tar.gz https://github.com/fables-tales/rubyfmt/releases/download/v0.8.1/rubyfmt-v0.8.1-Linux.tar.gz
+          tar -xzf rubyfmt.tar.gz
+          rm rubyfmt.tar.gz
+      - name: rubyfmt
+        run: ./tmp/releases/v0.8.1-Linux/rubyfmt -c .
+
